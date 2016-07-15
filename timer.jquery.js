@@ -18,7 +18,7 @@
   $.timer = function(el,opts) {
     var defaults = {
       // default settings
-      play : true,
+      autoStart : true,
       initTime : 60,
       max : 999999,
       min : 0
@@ -26,14 +26,20 @@
 
     var $this = $(el);
     var settings = {};
-    
+    var namespace = 'timer';
     var time = 0;
     var state;
 
+    var __states = {
+      ready: 'ready',
+      playing: 'running',
+      paused: 'paused',
+      stopped: 'stopped'
+    };
     var __methods = {};
     var __timer = 0;
 
-    var namespace = 'timer';
+    
 
     $.data(el,'timer',$this);
     
@@ -45,7 +51,7 @@
         settings = $.extend({},defaults,opts);
 
         time = parseInt(settings.initTime);
-        state = settings.play ? 'playing':'paused';
+        state = settings.autoStart ? __states.playing:__states.paused;
         __methods.setup();
         $this.trigger(namespace+'.start')
       },
@@ -53,7 +59,7 @@
       setup : function() {
         __timer = setInterval(function(){
           if(__methods.checkTimeout()) { return false; }
-          if(state == 'playing') {
+          if(state == __states.playing) {
             __methods.changeTime(-1); // For closure issues, DO NOT use `time` in this scope
             __methods.render();
           }
@@ -64,7 +70,7 @@
         if(time<=0) {
           clearInterval(__timer);
           $this.trigger(namespace+'.timeout');
-          state = 'finished';
+          state = __states.stopped;
           return true;
         }
         return false;
@@ -77,7 +83,7 @@
 
       setTime : function(time) {
         time = time>settings.max ? settings.max:(time<settings.min ? settings.min:time);
-        $this.trigger(namespace+'.change');
+        $this.trigger('timer.change');
         __methods.render();
       },
 
@@ -89,15 +95,13 @@
     // public methods
     timer = $this.methods = {
       addTime : function(t) {
-        if(state!='finished') {
-          __methods.changeTime(t);
-        }
+        __methods.changeTime(t);
       },
       pause : function() {
-        state = 'paused';
+        state = __states.paused;
       },
       play : function() {
-        state = 'playing';
+        state = __states.playing;
       },
       getState : function() {
         return state;

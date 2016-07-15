@@ -4,7 +4,7 @@
 
 # Options
 
-`play` start playing the timer as soon as initialized, `true` by default
+`autoStart` start playing as soon as initialized, `true` by default
 
 `initTime` time got when timer is initialized, `60` by default
 

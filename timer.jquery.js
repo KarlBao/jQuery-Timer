@@ -39,8 +39,6 @@
     var __methods = {};
     var __timer = 0;
 
-    
-
     $.data(el,'timer',$this);
     
     // private methods
@@ -53,7 +51,7 @@
         time = parseInt(settings.initTime);
         state = settings.autoStart ? __states.playing:__states.paused;
         __methods.setup();
-        $this.trigger(namespace+'.start')
+        $this.trigger(namespace+'.start');
       },
 
       setup : function() {
@@ -112,7 +110,7 @@
     };
 
     __methods.init(opts);
-  }
+  };
   
   $.fn.timer = function(options) {
     if (options === undefined) { options = {}; }
@@ -128,5 +126,5 @@
     else {
       $.error( 'Method ' +  options + ' does not exist on jQuery.timer' );
     } 
-  }
+  };
 });

@@ -83,7 +83,7 @@
 
       setTime : function(time) {
         time = time>settings.max ? settings.max:(time<settings.min ? settings.min:time);
-        $this.trigger('timer.change');
+        $this.trigger(namespace+'change');
         __methods.render();
       },
 
@@ -93,7 +93,7 @@
     };
     
     // public methods
-    timer = $this.methods = {
+    $this.methods = {
       addTime : function(t) {
         __methods.changeTime(t);
       },

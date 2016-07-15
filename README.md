@@ -28,7 +28,7 @@
 
 `play()` - play the timer
 
-`getState()` - get the state of timer, available states: `playing`, `paused`, `finished`
+`getState()` - get the state of timer, available states: `playing`, `paused`, `stopped`
 
 `getTime()` - get the time rest
 

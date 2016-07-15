@@ -32,7 +32,7 @@
 
     var __states = {
       ready: 'ready',
-      playing: 'running',
+      playing: 'playing',
       paused: 'paused',
       stopped: 'stopped'
     };

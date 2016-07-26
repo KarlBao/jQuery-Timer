@@ -1,6 +1,6 @@
 # jQuery-Timer
 
-jQuert-Timer is a very light (1.24KB) jQuery plugin for building contralable countdown timer.
+jQuert-Timer is a very light (1.24KB) jQuery plugin for building controlable countdown timer.
 
 ---------------
 
